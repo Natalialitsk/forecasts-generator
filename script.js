@@ -1,5 +1,55 @@
 /* Генерация предсказания должна происходить при клике на кнопку «предсказать судьбу» */
+const button = document.querySelector(".forecast-btn");
+const container = document.querySelector(".current-forecast");
 
+button.addEventListener("click", function () {
+  function makeMovieCard(title, getRandomIntInclusive) {
+
+    const firstCard = document.querySelector(".forecasts");
+
+    const firstPredictionTitle = document.createElement("h1");
+    firstPredictionTitle.textContent = title;
+
+    const firstProbability = document.createElement("p");
+    firstProbability.textContent = getRandomIntInclusive(0, 100) + "%";
+
+    function getRandomIntInclusive(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    firstCard.append(firstPredictionTitle, firstProbability);
+
+    return firstCard;
+  }
+
+  const firstPrediction = makeMovieCard('Исполниться самая заветная мечта');
+  firstCard.append(firstPrediction);
+
+  firstPrediction.remove();
+
+  const cardTemplate = document.querySelector("#forecast-item");
+
+  function makeCardByTemplate(title, getRandomIntInclusive) {
+    const myCard = cardTemplate.content.cloneNode(true);
+
+    myCard.querySelector("h1").textContent = title;
+    myCard.querySelector("p").textContent = getRandomIntInclusive;
+
+    return myCard;
+  }
+
+  const secondPrediction = makeCardByTemplate('Выполнишь цели поставленные на год', getRandomIntInclusive);
+  firstCard.append(secondPrediction);
+
+  const thirdPrediction = makeMovieCard('Через год будешь на любимой работе');
+  firstCard.append(thirdCard);
+
+  const fourPrediction = makeMovieCard('Купишь родителям путевку на море');
+  firstCard.append(fourCard);
+
+  const fifthPrediction = makeMovieCard('Встретишь любовь всей своей жизни');
+  firstCard.append(fifthCard);
+});
 /* Заранее заготовь 3-5 предсказаний и в зависимости от того, как лягут карты судьбы (или что скажет Math.random) показывай их пользователю */
 
 /* Подставляй текст нового предсказания в .current-forecast h1 */
